@@ -21,7 +21,7 @@ def daily_expenses(expense_list):
 
 def water_reminder(hours):
     glasses = hours * 2
-    return f"Drink {glasses} glasses of water today! 💧"
+    return f"Drink {glasses} glasses of water today!"
 
 def prioritize_tasks(tasks):
     if not tasks:
