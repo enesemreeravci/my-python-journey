@@ -1,4 +1,3 @@
-
 class Device:
     def __init__(self, name, location):
         self.name = name
@@ -6,9 +5,9 @@ class Device:
         self.status = 0
 
     def get_status(self):
-        i f(self.status == 0):
+        if self.status == 0:
             print("OFF")
-        eli f(self.status == 1):
+        elif self.status == 1:
             print("ON")
 
     def turn_on(self):
@@ -26,7 +25,7 @@ class Light(Device):
         self.color = "white"
 
     def set_brightness(self, value_of_brightness):
-        i f(value_of_brightness >= 0 and value_of_brightness <= 100):
+        if 0 <= value_of_brightness <= 100:
             self.brightness = value_of_brightness
             print(f"{self.name} brightness set to {value_of_brightness}")
         else:
@@ -44,7 +43,7 @@ class Thermostat(Device):
     def set_temperature(self, temp):
         if 15 <= temp <= 30:
             self.temperature = temp
-            print(f"{self.name} tempreture set to {temp}°C")
+            print(f"{self.name} temperature set to {temp}°C")
 
 class SecurityCamera(Device):
     def __init__(self, name, location):
@@ -83,18 +82,90 @@ class SmartDoor(Device):
         print(f"{self.name} is locked")
 
     def unlock(self, code):
-        i f(code == self.__security_code):
+        if code == self.__security_code:
             self.locked = False
             print(f"{self.name} is unlocked")
         else:
             print("Incorrect security code")
 
     def change_code(self, old_code, new_code):
-        i f(old_code == self.__security_code):
+        if old_code == self.__security_code:
             self.__security_code = new_code
             print("Success")
         else:
             print("Old code is incorrect, code not changed")
 
 class HomeAutomationSystem:
-    pass
+    def __init__(self):
+        self.devices = []
+
+    def add_device(self, device):
+        self.devices.append(device)
+        print(f"{device.name} is added")
+
+    def find_device_by_name(self, device_name):
+        for device in self.devices:
+            if device.name == device_name:
+                return device
+        return None
+
+    def remove_device(self, name):
+        device = self.find_device_by_name(name)
+        if device is not None:
+            self.devices.remove(device)
+            print(f"{device.name} is removed")
+        else:
+            print("device not found")
+
+    def list_devices(self):
+        if len(self.devices) == 0:
+            print("No devices found")
+            return
+        for device in self.devices:
+            device_type = type(device).__name__
+            print(f"{device.name} ({device_type}) in {device.location}")
+
+    def turn_on_all(self):
+        if len(self.devices) == 0:
+            print("No devices found")
+        else:
+            for device in self.devices:
+                device.turn_on()
+
+    def turn_off_all(self):
+        if len(self.devices) == 0:
+            print("No devices found")
+        else:
+            for device in self.devices:
+                device.turn_off()
+
+    def night_mode(self):
+        if len(self.devices) == 0:
+            print("No devices found")
+        else:
+            for device in self.devices:
+                if isinstance(device, Light):
+                    device.turn_off()
+                elif isinstance(device, SmartDoor):
+                    device.lock()
+                elif isinstance(device, SecurityCamera):
+                    device.turn_on()
+        print("Night mode activated.")
+
+
+    def vacation_mode(self):
+        if len(self.devices) == 0:
+            print("No devices  found")
+        else:
+            for device in self.devices:
+                if isinstance(device, Light):
+                    device.turn_off()
+                elif isinstance(device, SmartDoor):
+                    device.lock()
+                elif isinstance(device, SecurityCamera):
+                    device.turn_on()
+        print("Vacation mode activated")
+
+
+
+
