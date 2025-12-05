@@ -186,7 +186,6 @@ class HomeAutomationSystem:
                     device.turn_on()
         print("Vacation mode activated")
 
-
 if __name__ == "__main__":
     system = HomeAutomationSystem()
 
