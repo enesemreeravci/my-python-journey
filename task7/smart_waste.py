@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
 
+from task8.health_data_management import save_data
+
+
 class Waste(ABC):
     def __init__(self, weight: float):
         self.weight = weight
@@ -8,7 +11,6 @@ class Waste(ABC):
     @abstractmethod
     def waste_type(self) -> str:
         pass
-
     @abstractmethod
     def process(self) -> str:
         pass

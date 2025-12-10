@@ -14,28 +14,33 @@ def filter_sensors():
    filtered_data = filter(lambda sensor : sensor["status"] == "active" , sensor_data)
    active_sensors = list(filtered_data)
    return active_sensors
+
 # store value of consumption(new values divided by 100) with new list and return
 def normalize_energy_consumption(active_sensors):
     normalized_data = map(lambda sensor : sensor["energy_consumption"] / 100, active_sensors)
     result = list(normalized_data)
     return result
-
+# calculate total consumption
 def total_energy_consumption(active_sensors):
     values = map(lambda sensor : sensor["energy_consumption"], active_sensors)
     total = functools.reduce(lambda a, b: a+b, values)
     return total
 
+# go through all active consumption and store in filtered. to identify location use that filtered list
+# and return the location of that area.
 def identify_high_energy_areas(active_sensors, limit):
     filtered = filter(lambda sensor : sensor["energy_consumption"] / 100 >= limit, active_sensors)
     location = map(lambda sensor: sensor["location"], filtered)
     result = list(location)
     return result
 
+# call each function and print dataset
 def main():
     active = filter_sensors()
     normalized = normalize_energy_consumption(active)
     total = total_energy_consumption(active)
     high = identify_high_energy_areas(active, 0.80)
+    print("Non-Filtered data:", sensor_data)
     print("Filtered data:", active)
     print("Normalized data:", normalized)
     print("Total energy consumption:", total, "kWh")
