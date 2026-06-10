@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MY FLASK APP</title>
+</head>
+<body>
+    <form action="/calculate" method="GET">
+        <LABEl for="name"> ENTER 2 NUMBER </LABEl>
+        <input type="number" name = "num1">
+        <input type="number" name = "num2">
+        <button type="submit">Submit</button>
+    </form>
+    {% if result is not none %}
+        <h1>Result: {{ result }}</h1>
+    {% endif %}
+</body>
