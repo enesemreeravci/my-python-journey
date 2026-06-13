@@ -1,0 +1,17 @@
+<h1>Registered Users</h1>
+
+{% for user in users %}
+
+    <p>
+        ID: {{ user[0] }} |
+        Username: {{ user[1] }} |
+        Email: {{ user[2] }}
+    </p>
+
+    <form action="/delete/{{ user[0] }}" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+
+    <hr>
+
+{% endfor %}
